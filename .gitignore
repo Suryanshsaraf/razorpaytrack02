@@ -1,0 +1,13 @@
+# Virtual environment
+venv/
+.env
+__pycache__/
+*.pyc
+
+# Dataset (can be generated via python benchmark/generate_data.py)
+benchmark/datasets/*.csv
+
+# Node & Build
+frontend/node_modules/
+frontend/dist/
+.DS_Store
