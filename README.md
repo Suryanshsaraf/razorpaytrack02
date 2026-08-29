@@ -1,11 +1,13 @@
 # 🛡️ RazorShield AI — Tiered Multi-Modal Risk Engine & Autonomous Dispute Representment
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Interactive_Merchant_Console-00D924?style=for-the-badge&logo=google-chrome&logoColor=white)](https://suryanshsaraf.github.io/razorpaytrack02/)
 [![Razorpay Buildathon 2026](https://img.shields.io/badge/Razorpay_Buildathon-Track_02:_AI_Risk_Manager-blue?style=for-the-badge&logo=razorpay)](https://razorpay.com/buildathon/)
 [![Defense Only](https://img.shields.io/badge/Security-Strictly_Defense_Only-green?style=for-the-badge)](https://razorpay.com/buildathon/)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-yellow.svg?style=for-the-badge&logo=python)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black.svg?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 
+> 🚀 **LIVE INTERACTIVE DEMO:** [https://suryanshsaraf.github.io/razorpaytrack02/](https://suryanshsaraf.github.io/razorpaytrack02/)  
 > **Submission for Razorpay AI Buildathon 2026 — Track 02: AI Risk Manager**  
 > *Stopping merchant loss across Fraud, Return-to-Origin (RTO), and Chargebacks through Sub-20ms Hybrid Inference and Autonomous Visa CE 3.0 Evidence Synthesizers.*
 
