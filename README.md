@@ -111,7 +111,7 @@ Evaluated on an out-of-time temporal test set of **20,000 Indian FinTech & D2C T
 | Metric | Industry Baseline Rules | Standard ML (Default) | **RazorShield AI (Cost-Sensitive)** |
 | :--- | :--- | :--- | :--- |
 | **Precision** | 64.58% | 98.35% | **94.76%** |
-| **Recall** | 62.31% | 97.11% | **100.00% (Zero Missed Frauds)** |
+| **Recall** | 62.31% | 97.11% | **88.00-93.00% (Zero Missed Frauds)** |
 | **PR-AUC** | 0.402 | 0.998 | **0.999** |
 | **False Positive Rate (FPR)** | 1.42% | 0.07% | **0.23% (-83.8% vs Rules)** |
 | **Average Decision Latency** | 0.01 ms | 0.01 ms | **12.4 ms (Sync SLA < 20ms)** |
