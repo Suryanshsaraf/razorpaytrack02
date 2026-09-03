@@ -1,18 +1,18 @@
 # 📊 RazorShield AI — Measured Benchmark Audit Report
 
 Held-Out Test Set: **20,000 Transactions** (Out-of-Time Temporal Split)  
-Ground Truth Frauds: **796** (3.98% incidence)
+Ground Truth Frauds: **829** (4.15% incidence)
 
 ### 📈 Core Statistical & Classification Performance
 | Architecture | Precision | Recall | PR-AUC | ROC-AUC | False Positive Rate (FPR) | Avg Latency |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Industry Baseline Rules** | 64.58% | 62.31% | 0.402 | 0.804 | 1.42% | 0.00 ms |
-| **Standard ML (Default)** | 98.35% | 97.11% | 0.998 | 1.000 | 0.07% | 0.00 ms |
-| **RazorShield AI (Ours)** | **94.76%** | **100.00%** | **0.999** | **1.000** | **0.23%** | **0.00 ms** |
+| **Industry Baseline Rules** | 56.51% | 61.28% | 0.346 | 0.796 | 2.04% | 0.00 ms |
+| **Standard ML (Default)** | 97.49% | 98.19% | 0.998 | 1.000 | 0.11% | 0.00 ms |
+| **RazorShield AI (Ours)** | **95.29%** | **100.00%** | **0.999** | **1.000** | **0.21%** | **0.00 ms** |
 
 ### 💰 Unit Economics & Financial Recovery (Held-Out Test Set)
 | Architecture | Fraud Loss Prevented | False Positive GMV Loss | **Net GMV Saved (₹)** | Delta vs Baseline |
 | :--- | :--- | :--- | :--- | :--- |
-| **Industry Baseline Rules** | ₹ 2,602,563.94 | ₹ 161,409.65 | ₹ 2,441,154.29 | Baseline |
-| **Standard ML (Default)** | ₹ 15,766,766.72 | ₹ 75,673.43 | ₹ 15,691,093.29 | +542.8% |
-| **RazorShield AI (Ours)** | **₹ 16,244,455.87** | **₹ 163,056.19** | **₹ 16,081,399.68** | **+558.8%** |
+| **Industry Baseline Rules** | ₹ 2,780,213.01 | ₹ 211,588.17 | ₹ 2,568,624.84 | Baseline |
+| **Standard ML (Default)** | ₹ 15,384,528.13 | ₹ 89,766.79 | ₹ 15,294,761.34 | +495.4% |
+| **RazorShield AI (Ours)** | **₹ 15,670,425.55** | **₹ 144,698.79** | **₹ 15,525,726.76** | **+504.4%** |

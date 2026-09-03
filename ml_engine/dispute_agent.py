@@ -1,22 +1,59 @@
 """
-RazorShield AI — Visa Compelling Evidence 3.0 (CE 3.0) Dispute Synthesizer
-Automatically compiles dispute representment dossiers by mapping 3DS tokens,
-prior undisputed transactions, logistics delivery telemetry, and IP device fingerprints
-against Visa 10.4 / 13.1 and Mastercard dispute regulations.
+RazorShield AI — Visa Compelling Evidence 3.0 (CE 3.0) & Mastercard LLM Dispute Synthesizer
+Combines deterministic regulatory rule gates with LLM (OpenAI / Gemini / Anthropic) reasoning
+to synthesize legally airtight dispute representment packets and liability shift dossiers.
 """
 
+import os
+import json
+import urllib.request
 from datetime import datetime
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 
 class DisputeRepresentmentAgent:
-    def __init__(self):
+    def __init__(self, api_key: Optional[str] = None, llm_provider: str = "auto"):
+        self.api_key = api_key or os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY") or os.getenv("GEMINI_API_KEY")
+        self.llm_provider = llm_provider
         self.reason_codes = {
             "VISA_10.4": "Visa 10.4 — Other Fraud / Card-Absent Environment",
             "VISA_13.1": "Visa 13.1 — Merchandise / Services Not Received",
             "MC_4837": "Mastercard 4837 — No Cardholder Authorization",
             "MC_4853": "Mastercard 4853 — Goods Not Provided / Defective"
         }
-        
+
+    def _call_llm_synthesizer(self, prompt: str) -> Optional[str]:
+        """
+        Executes real LLM call if API keys are configured in the environment.
+        Falls back seamlessly to deterministic neural template compiler if no external keys exist.
+        """
+        if not self.api_key:
+            return None
+
+        try:
+            # Standard OpenAI / compatible endpoint
+            url = "https://api.openai.com/v1/chat/completions"
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {self.api_key}"
+            }
+            body = {
+                "model": "gpt-4o-mini",
+                "messages": [
+                    {"role": "system", "content": "You are a Senior Payment Scheme Dispute Counsel specializing in Visa CE 3.0 and Mastercard dispute arbitration."},
+                    {"role": "user", "content": prompt}
+                ],
+                "temperature": 0.2,
+                "max_tokens": 400
+            }
+            req = urllib.request.Request(url, data=json.dumps(body).encode('utf-8'), headers=headers)
+            with urllib.request.urlopen(req, timeout=4.0) as response:
+                res_data = json.loads(response.read().decode('utf-8'))
+                return res_data["choices"][0]["message"]["content"].strip()
+        except Exception as e:
+            # Graceful recovery
+            print(f"[!] LLM Provider timeout/error: {e}. Falling back to deterministic legal compiler.")
+            return None
+
     def synthesize_dossier(self, dispute_data: Dict[str, Any]) -> Dict[str, Any]:
         """
         Compiles a comprehensive representment packet with Visa CE 3.0 compliance checks.
@@ -56,32 +93,48 @@ class DisputeRepresentmentAgent:
             }
         ])
         
-        # Determine Visa CE 3.0 Eligibility
+        # Deterministic Visa CE 3.0 Qualification Gate
         ce30_qualifies = len(prior_qualifying_txs) >= 2 and all(
             t.get("matching_device") or t.get("matching_ip") for t in prior_qualifying_txs
         )
         
-        # Compute Win Probability
+        # Win Probability Calculation
         base_score = 45.0
         if "05" in eci_code:
             base_score += 25.0 # 3DS liability shift
         if ce30_qualifies:
             base_score += 20.0 # CE 3.0 conclusive evidence rule
         if tracking_id and "DELHIVERY" in tracking_id:
-            base_score += 7.0 # Verified carrier POD
+            base_score += 6.0 # Verified carrier POD
             
         win_probability = min(96.0, base_score)
         
-        # Synthesize Executive Legal Argument
-        executive_argument = (
-            f"REPRESENTMENT BRIEF UNDER VISA CE 3.0 RULES:\n"
-            f"The cardholder claims unauthorized transaction for Dispute {dispute_id} (ARN: {arn}). "
-            f"However, the transaction passed full 3DS 2.2 authentication (ECI {eci_code}). "
-            f"Under Visa Compelling Evidence 3.0 guidelines, the merchant provides proof of {len(prior_qualifying_txs)} "
-            f"prior undisputed transactions sharing identical Device Fingerprint ({device_fingerprint[:12]}...) and IP ASN. "
-            f"Furthermore, Carrier tracking ({tracking_id}) confirms physical delivery with signed POD to verified GPS coordinates ({delivery_gps}). "
-            f"Merchant requests immediate reversal of chargeback and full fund settlement."
-        )
+        # LLM Synthesis Prompt
+        llm_prompt = f"""
+        Draft an executive legal representment argument for payment network arbitration:
+        - Dispute ID: {dispute_id}, ARN: {arn}, Amount: INR {amount}
+        - Reason Code: {self.reason_codes.get(reason_code, reason_code)}
+        - 3DS ECI Code: {eci_code} (Liability Shift indicator)
+        - Visa CE 3.0 Status: {'QUALIFIED with ' + str(len(prior_qualifying_txs)) + ' prior undisputed matches' if ce30_qualifies else 'STANDARD_REVIEW'}
+        - Carrier Proof: {tracking_id} with GPS match at {delivery_gps}
+        Provide a concise, 4-sentence legally formal representment brief demanding chargeback reversal.
+        """
+        
+        # Attempt LLM generation, with zero-downtime template fallback
+        llm_output = self._call_llm_synthesizer(llm_prompt)
+        
+        if not llm_output:
+            executive_argument = (
+                f"REPRESENTMENT BRIEF UNDER VISA CE 3.0 RULES:\n"
+                f"The cardholder claims unauthorized transaction for Dispute {dispute_id} (ARN: {arn}). "
+                f"However, the transaction passed full 3DS 2.2 authentication (ECI {eci_code}). "
+                f"Under Visa Compelling Evidence 3.0 guidelines, the merchant provides proof of {len(prior_qualifying_txs)} "
+                f"prior undisputed transactions sharing identical Device Fingerprint ({device_fingerprint[:12]}...) and IP ASN. "
+                f"Furthermore, Carrier tracking ({tracking_id}) confirms physical delivery with signed POD to verified GPS coordinates ({delivery_gps}). "
+                f"Merchant requests immediate reversal of chargeback and full fund settlement."
+            )
+        else:
+            executive_argument = f"REPRESENTMENT BRIEF (LLM SYNTHESIZED - VISA CE 3.0):\n{llm_output}"
         
         timeline = [
             {"step": "Order Placed & Paid", "timestamp": "2026-07-12 18:30:12", "detail": f"Authenticated via 3DS (ECI {eci_code}) from IP {device_ip}"},
