@@ -11,3 +11,7 @@ benchmark/datasets/*.csv
 frontend/node_modules/
 frontend/dist/
 .DS_Store
+
+# Auto-generated benchmark metrics
+benchmark/metrics.json
+

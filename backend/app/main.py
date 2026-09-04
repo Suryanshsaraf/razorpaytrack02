@@ -321,21 +321,5 @@ def get_dashboard_metrics():
         except Exception as e:
             print(f"[!] Error reading metrics.json: {e}")
             
-    # Clean fallback if metrics.json is not present
-    return {
-        "benchmark": {
-            "precision_pct": 95.29,
-            "recall_pct": 100.00,
-            "pr_auc": 0.999,
-            "fpr_pct": 0.21,
-            "avg_latency_ms": 1.4,
-            "net_gmv_saved_inr": 15525727.0
-        },
-        "live_telemetry": {
-            "total_transactions_scanned": 124890,
-            "threats_intercepted": 4812,
-            "sybil_clusters_isolated": 18,
-            "dispute_win_rate_pct": 96.0,
-            "avg_checkout_overhead_ms": 1.4
-        }
-    }
+    # Fallback message
+    return {"error": "Benchmark not yet run. Execute: python benchmark/eval.py"}
