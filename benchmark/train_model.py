@@ -169,14 +169,23 @@ def train_and_export_models(csv_path="benchmark/datasets/transactions_100k.csv")
     # Export raw booster text format and ONNX representation
     razor_model.booster_.save_model("ml_engine/models/razorshield_model.txt")
     
-    # Save ONNX binary representation
+    # Save ONNX binary protobuf representation
     try:
-        # Save ONNX model weights representation
+        import onnxmltools
+        from onnxmltools.convert.common.data_types import FloatTensorType
+        import onnxruntime as ort
+        
+        initial_types = [('float_input', FloatTensorType([None, len(X_train.columns)]))]
+        onnx_model = onnxmltools.convert_lightgbm(razor_model, initial_types=initial_types, target_opset=14)
+        
         with open("ml_engine/models/razorshield.onnx", "wb") as f:
-            f.write(razor_model.booster_.model_to_string().encode('utf-8'))
-        print("[✓] Model artifacts saved to ml_engine/models/ (razorshield_lgbm.pkl, razorshield.onnx)")
+            f.write(onnx_model.SerializeToString())
+            
+        # Verify with ONNXRuntime session
+        _session = ort.InferenceSession("ml_engine/models/razorshield.onnx")
+        print("[✓] Real Protobuf ONNX model exported and verified: ml_engine/models/razorshield.onnx")
     except Exception as e:
-        print(f"[!] Warning on ONNX write: {e}")
+        print(f"[!] Warning on ONNX export/verify: {e}")
         
     return {
         "y_test": y_test,

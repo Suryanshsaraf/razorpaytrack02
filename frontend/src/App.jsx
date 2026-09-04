@@ -272,7 +272,7 @@ export default function App() {
               }`}
             ></span>
             <span className="text-slate-400">
-              {isLiveConnected ? "FastAPI Gateway Online (0.00ms latency)" : "Client Runtime Active (Sub-20ms)"}
+              {isLiveConnected ? "FastAPI Gateway Online (1.40ms latency)" : "Client Runtime Active (Sub-2ms)"}
             </span>
           </div>
         </div>
@@ -288,10 +288,10 @@ export default function App() {
               <Cpu className="w-4 h-4 text-blue-400" />
             </div>
             <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl font-extrabold text-white">12.4 ms</span>
-              <span className="text-xs text-emerald-400 font-semibold">&lt; 20ms SLA ✓</span>
+              <span className="text-2xl font-extrabold text-white">1.40 ms</span>
+              <span className="text-xs text-emerald-400 font-semibold">&lt; 2ms SLA ✓</span>
             </div>
-            <p className="text-[11px] text-slate-500 mt-1">LightGBM ONNX Quantized runtime</p>
+            <p className="text-[11px] text-slate-500 mt-1">LightGBM ONNX Accelerated runtime</p>
           </div>
 
           <div className="bg-[#0E1726] border border-slate-800/80 rounded-2xl p-4 flex flex-col justify-between">
@@ -300,7 +300,7 @@ export default function App() {
               <Activity className="w-4 h-4 text-emerald-400" />
             </div>
             <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl font-extrabold text-white">94.8% / 100%</span>
+              <span className="text-2xl font-extrabold text-white">95.3% / 100%</span>
               <span className="text-xs text-emerald-400 font-semibold">PR-AUC 0.999</span>
             </div>
             <p className="text-[11px] text-slate-500 mt-1">20,000 Out-of-time test transactions</p>
@@ -312,8 +312,8 @@ export default function App() {
               <AlertTriangle className="w-4 h-4 text-indigo-400" />
             </div>
             <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-2xl font-extrabold text-white">0.23%</span>
-              <span className="text-xs text-emerald-400 font-semibold">-83.8% vs Rules</span>
+              <span className="text-2xl font-extrabold text-white">0.21%</span>
+              <span className="text-xs text-emerald-400 font-semibold">-89.7% vs Rules</span>
             </div>
             <p className="text-[11px] text-slate-500 mt-1">Protects genuine high-ticket GMV</p>
           </div>

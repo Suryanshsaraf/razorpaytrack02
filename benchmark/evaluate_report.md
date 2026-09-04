@@ -6,7 +6,7 @@ Ground Truth Frauds: **829** (4.15% incidence)
 ### 📈 Core Statistical & Classification Performance
 | Architecture | Precision | Recall | PR-AUC | ROC-AUC | False Positive Rate (FPR) | Single-Sample Latency |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Industry Baseline Rules** | 56.51% | 61.28% | 0.597 | 0.796 | 2.04% | 0.38 ms |
+| **Industry Baseline Rules** | 56.51% | 61.28% | 0.597 | 0.796 | 2.04% | 0.35 ms |
 | **Standard ML (Default)** | 97.49% | 98.19% | 0.998 | 1.000 | 0.11% | 0.31 ms |
 | **RazorShield AI (Ours)** | **95.29%** | **100.00%** | **0.999** | **1.000** | **0.21%** | **1.40 ms** |
 

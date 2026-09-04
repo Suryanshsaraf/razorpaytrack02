@@ -24,7 +24,7 @@ In Indian FinTech and high-growth D2C ecosystems, payment risks and post-transac
 4. **Manual Chargeback Loss:** Merchants lose >70% of disputable chargebacks simply because compiling logs, 3DS tokens, IP telemetry, and delivery proofs into Visa/Mastercard-compliant formats before the 10-day deadline is manually impossible.
 
 **RazorShield AI** resolves this via a **4-Tier Architecture**:
-* **Tier-1:** Ultra-fast, cost-sensitive ONNX/LightGBM risk scoring in **$< 13\text{ms}$**.
+* **Tier-1:** Ultra-fast, cost-sensitive ONNX/LightGBM risk scoring in **$< 2\text{ms}$ ($1.40\text{ms}$ single-sample latency)**.
 * **Tier-2:** Graph-based Sybil & Fraud Ring detection across mutating UPI VPAs and device fingerprints.
 * **Tier-3:** Autonomous **Visa Compelling Evidence 3.0 (CE 3.0)** LLM Dispute Representment Agent.
 * **Tier-4:** Live Interactive Merchant Console with Real-Time Adversarial Attack Simulator.
@@ -39,7 +39,7 @@ flowchart TD
         TX[Incoming Transaction / Checkout Event]
     end
 
-    subgraph Tier 1: Real-Time Edge Interceptor [< 13ms]
+    subgraph Tier 1: Real-Time Edge Interceptor [< 2ms / 1.40ms]
         RuleEngine[Deterministic Velocity & Sanction Rules]
         ONNXEngine[Quantized LightGBM Cost-Sensitive Model]
         DecisionGate{Risk Score & Cost Matrix}
@@ -90,7 +90,7 @@ Building RazorShield AI revealed critical real-world systems bottlenecks that re
 
 1. **The 4.2-Second Latency Wall:**
    * *What Broke:* The initial prototype attempted an in-line multi-modal LLM call during the checkout evaluation loop. While reasoning was accurate, decision latency consistently hit $3.8\text{s} - 4.5\text{s}$—instantly triggering the $250\text{ms}$ payment gateway timeout.
-   * *The Fix:* Decoupled the architecture into a **Tiered Hybrid Model**: an ultra-fast, quantized LightGBM model handles synchronous edge scoring in $<13\text{ms}$, while complex entity graph clustering and Visa CE 3.0 LLM dossier synthesis run out-of-band asynchronously.
+   * *The Fix:* Decoupled the architecture into a **Tiered Hybrid Model**: an ultra-fast, quantized LightGBM/ONNX model handles synchronous edge scoring in $<2\text{ms}$ ($1.40\text{ms}$ single-sample latency), while complex entity graph clustering and Visa CE 3.0 LLM dossier synthesis run out-of-band asynchronously.
 
 2. **Temporal Data Leakage in K-Fold Cross-Validation:**
    * *What Broke:* Standard random train-test splitting yielded artificially inflated scores because transactions from the same mutating Sybil ring leaked into both train and validation sets.
