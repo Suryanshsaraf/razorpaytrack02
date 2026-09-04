@@ -134,9 +134,9 @@ Evaluated on an out-of-time temporal test set of **20,000 Indian FinTech & D2C T
 | :--- | :--- | :--- | :--- |
 | **Precision** | 56.51% | 97.49% | **95.29%** |
 | **Recall** | 61.28% | 98.19% | **100.00% (Zero Missed Frauds on Benchmark)** |
-| **PR-AUC** | 0.346 | 0.998 | **0.999** |
+| **PR-AUC** | 0.597 | 0.998 | **0.999** |
 | **False Positive Rate (FPR)** | 2.04% | 0.11% | **0.21% (-89.7% vs Rules)** |
-| **Average Decision Latency** | 0.01 ms | 0.01 ms | **12.4 ms (Sync SLA < 20ms)** |
+| **Single-Sample Decision Latency** | 0.35 ms | 0.31 ms | **1.40 ms (Sync SLA < 20ms)** |
 | **Net Financial Recovery (₹ Saved)** | ₹ 2,568,625 | ₹ 15,294,761 | **₹ 15,525,727 (+₹12.95M vs Rules)** |
 
 > **Statistical Generalization & Production Calibrations:** While 100% recall is achieved on this synthetic benchmark distribution, on noisy, non-stationary live payment traffic, expected recall is calibrated between **89%–94%**—delivering superior risk protection while preventing high-ticket false positive checkout abandonment.

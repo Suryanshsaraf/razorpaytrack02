@@ -1,0 +1,30 @@
+{
+  "status": "success",
+  "held_out_samples": 20000,
+  "total_frauds": 829,
+  "razorshield": {
+    "precision_pct": 95.29,
+    "recall_pct": 100.0,
+    "pr_auc": 0.999,
+    "roc_auc": 1.0,
+    "fpr_pct": 0.21,
+    "avg_latency_ms": 1.4,
+    "fraud_prevented_inr": 15670425.55,
+    "false_positive_loss_inr": 144698.79,
+    "net_gmv_saved_inr": 15525726.76
+  },
+  "baseline_rules": {
+    "precision_pct": 56.51,
+    "recall_pct": 61.28,
+    "pr_auc": 0.597,
+    "fpr_pct": 2.04,
+    "net_gmv_saved_inr": 2568624.84
+  },
+  "standard_ml": {
+    "precision_pct": 97.49,
+    "recall_pct": 98.19,
+    "pr_auc": 0.998,
+    "fpr_pct": 0.11,
+    "net_gmv_saved_inr": 15294761.34
+  }
+}
